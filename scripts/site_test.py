@@ -75,6 +75,9 @@ def fetch_case(case):
         return {"ok": False, "error": str(e)}
 
 
+DEFAULT_OUTPUT_FILE = "test_fetch_all_results.jsonl"
+
+
 def cmd_fetch(args):
     data = load_cases()
     cases = data["cases"]
@@ -89,17 +92,37 @@ def cmd_fetch(args):
         print(json.dumps({"error": "No cases to test"}))
         return
     
-    for case in cases:
-        print(f"--- Testing {case['id']}: {case['domain']} ---", file=sys.stderr)
-        fetch_result = fetch_case(case)
-        
-        output = {
-            "id": case["id"],
-            "domain": case["domain"],
-            "url": case["url"],
-            "fetch_result": fetch_result,
-        }
-        print(json.dumps(output, ensure_ascii=False))
+    output_file = None
+    output_path = None
+    if args.output is not None:
+        OUTPUT_DIR.mkdir(exist_ok=True)
+        if args.output == "":
+            output_path = OUTPUT_DIR / DEFAULT_OUTPUT_FILE
+        else:
+            output_path = Path(args.output)
+        output_file = open(output_path, "w", encoding="utf-8")
+    
+    try:
+        for case in cases:
+            print(f"--- Testing {case['id']}: {case['domain']} ---", file=sys.stderr)
+            fetch_result = fetch_case(case)
+            
+            output = {
+                "id": case["id"],
+                "domain": case["domain"],
+                "url": case["url"],
+                "fetch_result": fetch_result,
+            }
+            line = json.dumps(output, ensure_ascii=False)
+            
+            if output_file:
+                output_file.write(line + "\n")
+            else:
+                print(line)
+    finally:
+        if output_file:
+            output_file.close()
+            print(f"Results saved to: {output_path}", file=sys.stderr)
 
 
 def cmd_save_result(args):
@@ -163,6 +186,7 @@ def main():
     fetch_parser = subparsers.add_parser("fetch", help="Fetch test cases")
     fetch_parser.add_argument("--id", help="Comma-separated case IDs to test")
     fetch_parser.add_argument("--all", action="store_true", help="Test all cases including passed")
+    fetch_parser.add_argument("--output", "-o", nargs="?", const="", help="Output file path (JSONL format). Use empty string for default path")
     
     save_parser = subparsers.add_parser("save-result", help="Save test result")
     save_parser.add_argument("--id", required=True, help="Case ID")

@@ -13,8 +13,8 @@
       "id": "02",
       "domain": "finance.sina.com.cn",
       "status": "failed",
-      "quality_score": 10,
-      "quality_comment": "噪音过多，包含股市直播、评论、广告等",
+      "quality_score": 30,
+      "quality_comment": "使用scrapling解析器，但噪音过多，包含导航、登录框等",
       "url": "https://finance.sina.com.cn/roll/2025-09-19/doc-infrchxs4006271.shtml"
     },
     {
@@ -22,7 +22,7 @@
       "domain": "www.msn.cn",
       "status": "failed",
       "quality_score": 0,
-      "quality_comment": "Cookie政策文本，正文缺失",
+      "quality_comment": "抓取到的是Cookie政策文本，正文内容完全缺失",
       "url": "https://www.msn.cn/zh-cn/news/other/%E6%9D%8E%E8%BF%9E%E6%9D%B0%E7%AB%9F%E6%88%90-%E9%99%8C%E7%94%9F%E4%BA%BA-%E5%90%B4%E4%BA%AC%E8%B0%A2%E9%9C%86%E9%94%8B%E6%88%90%E6%9C%80%E5%90%8E%E4%B8%80%E4%BB%A3%E5%8A%9F%E5%A4%AB%E5%B7%A8%E6%98%9F-%E6%B1%9F%E6%B9%96%E8%B0%81%E6%9D%A5%E6%8E%A5%E6%A3%92/ar-AA1YB1E3"
     },
     {
@@ -30,7 +30,7 @@
       "domain": "www.sohu.com",
       "status": "passed",
       "quality_score": 85,
-      "quality_comment": "内容基本完整",
+      "quality_comment": "内容基本完整，噪音清除较好",
       "url": "https://www.sohu.com/a/996235269_121608032"
     },
     {
@@ -38,7 +38,7 @@
       "domain": "news.qq.com",
       "status": "passed",
       "quality_score": 90,
-      "quality_comment": "内容完整",
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://news.qq.com/rain/a/20260313A08DDL00"
     },
     {
@@ -46,15 +46,15 @@
       "domain": "sports.huanqiu.com",
       "status": "failed",
       "quality_score": 5,
-      "quality_comment": "噪音过多，导航和推荐内容混入",
+      "quality_comment": "抓取到的是AdBlock插件提示，正文内容完全缺失",
       "url": "https://sports.huanqiu.com/article/4QjG4cQdz1v"
     },
     {
       "id": "09",
       "domain": "www.guancha.cn",
       "status": "passed",
-      "quality_score": 80,
-      "quality_comment": "内容完整",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.guancha.cn/sports/2026_03_13_809919.shtml"
     },
     {
@@ -62,15 +62,15 @@
       "domain": "news.bjd.com.cn",
       "status": "passed",
       "quality_score": 90,
-      "quality_comment": "内容完整",
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://news.bjd.com.cn/2026/03/13/11628598.shtml"
     },
     {
       "id": "11",
       "domain": "news.sina.cn",
       "status": "passed",
-      "quality_score": 80,
-      "quality_comment": "内容完整",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://news.sina.cn/gn/2026-03-13/detail-inhqvhtn4169536.d.html?vt=4"
     },
     {
@@ -84,153 +84,138 @@
     {
       "id": "13",
       "domain": "www.chinanews.com.cn",
-      "status": "pending",
-      "quality_score": 0,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.chinanews.com.cn/ty/2026/03-13/10586350.shtml"
     },
     {
       "id": "14",
       "domain": "www.36kr.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.36kr.com/p/2984752225886082"
     },
     {
       "id": "15",
       "domain": "www.nbd.com.cn",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.nbd.com.cn/articles/2025-10-17/4095107.html"
     },
     {
       "id": "16",
       "domain": "news.qq.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 80,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://news.qq.com/rain/a/20260312A04DDQ00"
     },
-    {
-      "id": "17",
-      "domain": "mp.weixin.qq.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
-      "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773504861&ver=6598&signature=FSs19V-Ql2lWLxlX-VpP4nC4ExvDySQ*kGgCISaYzeK95NOyGYvQdcgDJPimAepz4TPsH5wU7Xr*p9NXun4RYXJdq5gf6LS5OgdnA5skkuHKYxLwyGbbrzVa2mUaXzbW&new=1"
-    },
-    {
-      "id": "18",
-      "domain": "mp.weixin.qq.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
-      "url": "https://mp.weixin.qq.com/s?src=11&timestamp=1773504861&ver=6598&signature=GE-0ZZJTqAz1kgiq3CjcphvBPozwO8znBtUlsKQyqdaAsXfDkJ0SMf7HOdsMFHPkP-dOp60j6FXLSoUAtxCpyRrLgn4YOCYnszBPjUTtzDyQQBznjBzRWh3LYuy8MOH9&new=1"
-    },
+
     {
       "id": "19",
       "domain": "baijiahao.baidu.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 70,
+      "quality_comment": "内容较短但基本完整",
       "url": "https://baijiahao.baidu.com/s?id=1859359368585426709&wfr=spider&for=pc"
     },
     {
       "id": "20",
       "domain": "baijiahao.baidu.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://baijiahao.baidu.com/s?id=1856155636617175508&wfr=spider&for=pc"
     },
     {
       "id": "21",
       "domain": "www.toutiao.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "failed",
+      "quality_score": 0,
+      "quality_comment": "需要JavaScript执行，无法获取正文内容",
       "url": "https://www.toutiao.com/article/7617049061619581480/"
     },
     {
       "id": "22",
       "domain": "news.mydrivers.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 80,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://news.mydrivers.com/1/1108/1108180.htm"
     },
     {
       "id": "23",
       "domain": "news.cctv.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://news.cctv.com/2026/03/14/ARTIKOxmS8y08Ezdt89y2I2z260314.shtml"
     },
     {
       "id": "24",
       "domain": "news.sina.com.cn",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 80,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://news.sina.com.cn/zx/gj/2026-03-14/doc-inhqwuuu3714268.shtml"
     },
     {
       "id": "25",
       "domain": "www.thepaper.cn",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 90,
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://www.thepaper.cn/newsDetail_forward_32769323"
     },
     {
       "id": "26",
       "domain": "military.people.com.cn",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "http://military.people.com.cn/n1/2025/1225/c1011-40631976.html"
     },
     {
       "id": "27",
       "domain": "www.news.cn",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.news.cn/fortune/20260314/b04b8abad1b040f6ae04bb8623e00e50/c.html"
     },
     {
       "id": "28",
       "domain": "www.chinanews.com.cn",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 85,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.chinanews.com.cn/sh/2026/03-14/10586622.shtml"
     },
     {
       "id": "29",
       "domain": "news.ifeng.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 90,
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://news.ifeng.com/c/8rUozrIUp80"
     },
     {
       "id": "30",
       "domain": "www.bilibili.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 80,
+      "quality_comment": "内容完整，噪音清除较好",
       "url": "https://www.bilibili.com/opus/1175833574604013571"
     },
     {
       "id": "31",
       "domain": "www.huxiu.com",
-      "status": "pending",
-      "quality_score": null,
-      "quality_comment": "",
+      "status": "passed",
+      "quality_score": 90,
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://www.huxiu.com/article/4842060.html"
     }
   ]

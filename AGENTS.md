@@ -9,8 +9,11 @@
 ```
 scrapling-news-boost/
 ├── SKILL.md              # 技能入口描述文件，供大模型理解技能用途和使用方法
+├── output/               # 测试输出目录
+├── cases.json            # 测试用例配置文件
 ├── scripts/
 │   ├── scrapling_fetch.py # 主入口脚本
+│   ├── site_test.py       # 测试脚本
 │   ├── fetcher/           # 抓取模块
 │   │   └── scrapling_fetcher.py
 │   ├── parsers/           # 解析模块
