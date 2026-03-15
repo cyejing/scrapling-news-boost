@@ -31,7 +31,7 @@ uv run scripts/scrapling_fetch.py <url> 15000 --json
   "final_url": "https://example.com/article",
   "title": "文章标题",
   "content_length": 5000,
-  "quality_score": 15,
+
   "fetch_mode": "stealth",
   "parser": "trafilatura",
   "fetch_duration": 4.89,
