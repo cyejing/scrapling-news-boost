@@ -95,13 +95,14 @@ playwright install chromium                # 安装 Chromium 浏览器
 
 使用该技能后，如果返回内容存在问题：
 1. 抓取失败，有报错输出
-2. 正文内容大部分缺失
-3. 抓取时间超时（>30秒）
+2. 正文内容比较少，有一些疑似被拦截或者抓取错误的内容
 4. 正文内容噪音过多
+3. 抓取时间超时（>30秒）
 
-当发生上述问题时，在 `logs.json` 文件追加记录：
+
+当发生上述问题时，在 `logs.jsonl` 文件追加记录：
 ```json
-{"timestamp":"2026-03-16T14:30:25+08:00","url":"https://example.com","status":"成功","fetch_mode":"stealth","parser":"trafilatura","text_length":5234,"quality_score":85,"issue":"少量噪音"}
+{"timestamp":"2026-03-16T14:30:25+08:00","url":"https://example.com","status":"成功","fetch_mode":"stealth","parser":"trafilatura","text_length":5234,"quality_score":85,"comment":"少量噪音"}
 ```
 
 | 字段 | 说明 |
@@ -112,8 +113,8 @@ playwright install chromium                # 安装 Chromium 浏览器
 | fetch_mode | stealth/fetcher/urllib |
 | parser | trafilatura/scrapling |
 | text_length | 文本字符数 |
-| quality_score | 质量评分0-100 |
-| issue | 问题描述 |
+| quality_score | 质量评分 0-100 |
+| comment | 问题描述 |
 
 **质量评分标准（0-100分）：**
 

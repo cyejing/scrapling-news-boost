@@ -12,9 +12,9 @@
     {
       "id": "02",
       "domain": "finance.sina.com.cn",
-      "status": "failed",
-      "quality_score": 30,
-      "quality_comment": "使用scrapling解析器，但噪音过多，包含导航、登录框等",
+      "status": "passed",
+      "quality_score": 90,
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://finance.sina.com.cn/roll/2025-09-19/doc-infrchxs4006271.shtml"
     },
     {
@@ -44,9 +44,9 @@
     {
       "id": "08",
       "domain": "sports.huanqiu.com",
-      "status": "failed",
-      "quality_score": 5,
-      "quality_comment": "抓取到的是AdBlock插件提示，正文内容完全缺失",
+      "status": "passed",
+      "quality_score": 75,
+      "quality_comment": "内容完整，但包含HTML标签噪音",
       "url": "https://sports.huanqiu.com/article/4QjG4cQdz1v"
     },
     {
@@ -77,7 +77,7 @@
       "id": "12",
       "domain": "www.globalpeople.com.cn",
       "status": "passed",
-      "quality_score": 75,
+      "quality_score": 70,
       "quality_comment": "内容较短但基本完整",
       "url": "https://www.globalpeople.com.cn/n4/2026/0314/c305917-21644941.html"
     },
@@ -113,7 +113,6 @@
       "quality_comment": "内容完整，噪音清除较好",
       "url": "https://news.qq.com/rain/a/20260312A04DDQ00"
     },
-
     {
       "id": "19",
       "domain": "baijiahao.baidu.com",
@@ -133,9 +132,9 @@
     {
       "id": "21",
       "domain": "www.toutiao.com",
-      "status": "failed",
-      "quality_score": 0,
-      "quality_comment": "需要JavaScript执行，无法获取正文内容",
+      "status": "passed",
+      "quality_score": 90,
+      "quality_comment": "内容完整，噪音清除干净",
       "url": "https://www.toutiao.com/article/7617049061619581480/"
     },
     {
