@@ -15,6 +15,7 @@ Examples:
 import argparse
 import sys
 import time
+from pathlib import Path
 
 from fetcher import ScraplingFetcher
 from parsers import ParserManager
@@ -42,6 +43,10 @@ def main():
         choices=["auto", "trafilatura", "scrapling"],
         default="auto",
         help="Parser to use: auto (default, Trafilatura with Scrapling fallback), trafilatura, scrapling",
+    )
+    arg_parser.add_argument(
+        "--output",
+        help="Output file path for JSON result (only works with --json)",
     )
 
     args = arg_parser.parse_args()
@@ -76,7 +81,6 @@ def main():
 
     result = OutputResult(
         url=args.url,
-        final_url=fetch_result.final_url,
         title=parse_result.title or fetch_result.title,
         content=content,
         content_length=len(content),
@@ -89,7 +93,11 @@ def main():
 
     formatter = OutputFormatter()
     if args.json:
-        print(formatter.to_json(result))
+        json_output = formatter.to_json(result)
+        if args.output:
+            Path(args.output).write_text(json_output, encoding="utf-8")
+        else:
+            print(json_output)
     else:
         print(formatter.to_markdown(result))
 

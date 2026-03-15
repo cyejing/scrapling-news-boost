@@ -5,7 +5,6 @@ from dataclasses import dataclass, asdict
 @dataclass
 class OutputResult:
     url: str
-    final_url: str
     title: str
     content: str
     content_length: int
@@ -24,7 +23,6 @@ class OutputFormatter:
         data = {
             'ok': True,
             'url': result.url,
-            'final_url': result.final_url,
             'title': result.title,
             'content_length': result.content_length,
             'fetch_mode': result.fetch_mode,
@@ -41,7 +39,6 @@ class OutputFormatter:
             f'# {result.title}' if result.title else '# (无标题)',
             '',
             f'> URL: {result.url}',
-            f'> 最终URL: {result.final_url}',
             f'> 内容长度: {result.content_length} 字符',
             f'> 抓取模式: {result.fetch_mode}',
             f'> 解析器: {result.parser_name}',

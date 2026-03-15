@@ -47,7 +47,7 @@ uv run scripts/scrapling_fetch.py <url> 10000 --parser <auto|trafilatura|scrapli
 ```markdown
 # 文章标题
 
-> URL: https://example.com | 最终URL: https://example.com/article
+> URL: https://example.com
 > 内容长度: 5000 字符 
 > 抓取模式: stealth | 解析器: trafilatura
 > 耗时: 抓取 4.89s + 解析 0.67s = 总计 5.56s
@@ -62,7 +62,6 @@ uv run scripts/scrapling_fetch.py <url> 10000 --parser <auto|trafilatura|scrapli
 {
   "ok": true,
   "url": "https://example.com",
-  "final_url": "https://example.com/article",
   "title": "文章标题",
   "content_length": 5000,
   "fetch_mode": "stealth",
@@ -100,16 +99,21 @@ playwright install chromium                # 安装 Chromium 浏览器
 3. 抓取时间超时（>30秒）
 4. 正文内容噪音过多
 
-当发生上述问题时，在 `logs.md` 文件记录：
-- 时间
-- 原始 URL
-- 抓取状态：成功 / 失败
-- 抓取模式
-- 解析器
-- 文本长度
-- 质量评分 0-100 分
-- 问题描述
+当发生上述问题时，在 `logs.json` 文件追加记录：
+```json
+{"timestamp":"2026-03-16T14:30:25+08:00","url":"https://example.com","status":"成功","fetch_mode":"stealth","parser":"trafilatura","text_length":5234,"quality_score":85,"issue":"少量噪音"}
+```
 
+| 字段 | 说明 |
+|------|------|
+| timestamp | ISO 时间 |
+| url | 原始 URL |
+| status | 成功/失败 |
+| fetch_mode | stealth/fetcher/urllib |
+| parser | trafilatura/scrapling |
+| text_length | 文本字符数 |
+| quality_score | 质量评分0-100 |
+| issue | 问题描述 |
 
 **质量评分标准（0-100分）：**
 

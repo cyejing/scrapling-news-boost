@@ -13,7 +13,6 @@ logger = get_logger(__name__)
 @dataclass
 class FetchResult:
     html: str
-    final_url: str
     title: str
     fetch_mode: str
     success: bool = True
@@ -54,7 +53,6 @@ class ScraplingFetcher:
         html = page.html_content
         return FetchResult(
             html=html,
-            final_url=page.url,
             title=_extract_title_from_html(html),
             fetch_mode="stealth",
             success=True,
@@ -73,7 +71,6 @@ class ScraplingFetcher:
         html = page.html_content
         return FetchResult(
             html=html,
-            final_url=page.url,
             title=_extract_title_from_html(html),
             fetch_mode="fetcher",
             success=True,
@@ -90,7 +87,6 @@ class ScraplingFetcher:
             html = r.read().decode("utf-8", errors="replace")
         return FetchResult(
             html=html,
-            final_url=url,
             title=_extract_title_from_html(html),
             fetch_mode="urllib",
             success=True,
@@ -101,7 +97,6 @@ class ScraplingFetcher:
         if parts.scheme not in ("http", "https"):
             return FetchResult(
                 html="",
-                final_url=url,
                 title="",
                 fetch_mode="",
                 success=False,
@@ -128,7 +123,6 @@ class ScraplingFetcher:
             logger.error(f"All fetch methods failed: {e}")
             return FetchResult(
                 html="",
-                final_url=url,
                 title="",
                 fetch_mode="",
                 success=False,

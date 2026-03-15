@@ -47,7 +47,7 @@ scrapling-news-boost/
 
 ### 测试文件
 
-`site-test.md` 包含测试网站列表和测试要求。
+`site-test.md` 包含测试用例网站列表和测试要求。
 
 ### 测试触发条件
 
