@@ -1,4 +1,10 @@
 from .base import ContentParser, ParseResult
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from logger import get_logger
+
+logger = get_logger(__name__)
 
 try:
     import trafilatura
@@ -64,7 +70,7 @@ class TrafilaturaParser(ContentParser):
             )
 
         except Exception as e:
-            print(f"WARN: Trafilatura extraction error: {e}")
+            logger.warning(f"Trafilatura extraction error: {e}")
             return ParseResult(
                 title="",
                 content="",

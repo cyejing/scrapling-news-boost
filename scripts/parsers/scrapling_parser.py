@@ -1,4 +1,10 @@
 from .base import ContentParser, ParseResult
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from logger import get_logger
+
+logger = get_logger(__name__)
 
 try:
     from scrapling.parser import Selector
@@ -58,7 +64,7 @@ class ScraplingParser(ContentParser):
             )
             
         except Exception as e:
-            print(f"WARN: Scrapling parser extraction error: {e}")
+            logger.warning(f"Scrapling parser extraction error: {e}")
             return ParseResult(
                 title="",
                 content="",

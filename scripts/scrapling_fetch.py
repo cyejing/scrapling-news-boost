@@ -18,7 +18,10 @@ import time
 
 from fetcher import ScraplingFetcher
 from parsers import ParserManager
-from format import OutputFormatter, OutputResult, calculate_quality_score
+from format import OutputFormatter, OutputResult
+from logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def main():
@@ -50,10 +53,10 @@ def main():
     fetch_duration = time.time() - fetch_start
 
     if not fetch_result.success:
-        print(f"ERROR: [Fetch] {fetch_result.error} (took {fetch_duration:.2f}s)")
+        logger.error(f"[Fetch] {fetch_result.error} (took {fetch_duration:.2f}s)")
         sys.exit(1)
 
-    print(f"INFO: [Fetch] success with mode={fetch_result.fetch_mode}, html_length={len(fetch_result.html)}, took={fetch_duration:.2f}s")
+    logger.info(f"[Fetch] success with mode={fetch_result.fetch_mode}, html_length={len(fetch_result.html)}, took={fetch_duration:.2f}s")
 
     parser_manager = ParserManager()
     
@@ -62,14 +65,12 @@ def main():
     parse_duration = time.time() - parse_start
 
     if not parse_result.success:
-        print(f"ERROR: [Parse] {parse_result.error} (took {parse_duration:.2f}s)")
+        logger.error(f"[Parse] {parse_result.error} (took {parse_duration:.2f}s)")
         sys.exit(1)
 
-    print(f"INFO: [Parse] success with parser={parse_result.parser_name}, content_length={len(parse_result.content)}, took={parse_duration:.2f}s")
+    logger.info(f"[Parse] success with parser={parse_result.parser_name}, content_length={len(parse_result.content)}, took={parse_duration:.2f}s")
 
     content = parse_result.content[: args.max_chars]
-
-    quality_score = calculate_quality_score(content)
 
     total_duration = fetch_duration + parse_duration
 
@@ -79,7 +80,6 @@ def main():
         title=parse_result.title or fetch_result.title,
         content=content,
         content_length=len(content),
-        quality_score=quality_score,
         fetch_mode=fetch_result.fetch_mode,
         parser_name=parse_result.parser_name,
         fetch_duration=fetch_duration,

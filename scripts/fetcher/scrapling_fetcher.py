@@ -2,25 +2,12 @@ import re
 import urllib.request
 from dataclasses import dataclass
 from urllib.parse import urlparse
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from logger import get_logger
 
-STEALTHY_FETCHER_CONFIG = {
-    'headless': True,
-    'network_idle': True,
-    'hide_canvas': True,
-    'block_webrtc': True,
-    'google_search': True,
-    'solve_cloudflare': True,
-    'real_chrome': True,
-    'locale': 'zh-CN',
-    'timeout': 30000,
-    'adaptive': True,
-}
-
-FETCHER_CONFIG = {
-    'stealthy_headers': True,
-    'adaptive': True,
-    'timeout': 30,
-}
+logger = get_logger(__name__)
 
 
 @dataclass
@@ -48,7 +35,22 @@ class ScraplingFetcher:
     def _fetch_with_stealthy(self, url: str) -> FetchResult:
         from scrapling.fetchers import StealthyFetcher
 
-        page = StealthyFetcher.fetch(url, **STEALTHY_FETCHER_CONFIG)
+        page = StealthyFetcher.fetch(
+            url,
+            headless=True,
+            network_idle=False,
+            disable_resources=True,
+            hide_canvas=True,
+            block_webrtc=True,
+            google_search=True,
+            solve_cloudflare=False,
+            real_chrome=True,
+            locale='zh-CN',
+            timeout=15000,
+            retries=2,
+            retry_delay=2,
+            adaptive=True,
+        )
         html = page.html_content
         return FetchResult(
             html=html,
@@ -62,7 +64,12 @@ class ScraplingFetcher:
         from scrapling.fetchers import Fetcher
 
         fetcher = Fetcher()
-        page = fetcher.get(url, **FETCHER_CONFIG)
+        page = fetcher.get(
+            url,
+            stealthy_headers=True,
+            adaptive=True,
+            timeout=15,
+        )
         html = page.html_content
         return FetchResult(
             html=html,
@@ -79,7 +86,7 @@ class ScraplingFetcher:
                 "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             },
         )
-        with urllib.request.urlopen(req, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=15) as r:
             html = r.read().decode("utf-8", errors="replace")
         return FetchResult(
             html=html,
@@ -104,21 +111,21 @@ class ScraplingFetcher:
         try:
             return self._fetch_with_stealthy(url)
         except ImportError as e:
-            print(f"WARN: scrapling not installed, falling back to urllib. {e}")
+            logger.warning(f"scrapling not installed, falling back to urllib. {e}")
         except Exception as e:
-            print(f"WARN: StealthyFetcher failed ({e}), trying Fetcher")
+            logger.warning(f"StealthyFetcher failed ({e}), trying Fetcher")
 
         try:
             return self._fetch_with_fetcher(url)
         except ImportError:
             pass
         except Exception as e:
-            print(f"WARN: Fetcher failed ({e}), falling back to urllib")
+            logger.warning(f"Fetcher failed ({e}), falling back to urllib")
 
         try:
             return self._fetch_with_urllib(url)
         except Exception as e:
-            print(f"ERROR: All fetch methods failed: {e}")
+            logger.error(f"All fetch methods failed: {e}")
             return FetchResult(
                 html="",
                 final_url=url,

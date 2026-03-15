@@ -9,7 +9,6 @@ class OutputResult:
     title: str
     content: str
     content_length: int
-    quality_score: int
     fetch_mode: str
     parser_name: str
     fetch_duration: float = 0.0
@@ -20,21 +19,6 @@ class OutputResult:
         return asdict(self)
 
 
-def calculate_quality_score(content: str) -> int:
-    text = content.strip()
-    if not text:
-        return 0
-    score = 0
-    score += min(len(text) // 500, 10)
-    if '\n' in text:
-        score += 2
-    if '#' in text or '-' in text:
-        score += 1
-    if len(text.split()) > 80:
-        score += 2
-    return score
-
-
 class OutputFormatter:
     def to_json(self, result: OutputResult, indent: int | None = None) -> str:
         data = {
@@ -43,7 +27,6 @@ class OutputFormatter:
             'final_url': result.final_url,
             'title': result.title,
             'content_length': result.content_length,
-            'quality_score': result.quality_score,
             'fetch_mode': result.fetch_mode,
             'parser': result.parser_name,
             'fetch_duration': round(result.fetch_duration, 2),
@@ -60,7 +43,6 @@ class OutputFormatter:
             f'> URL: {result.url}',
             f'> 最终URL: {result.final_url}',
             f'> 内容长度: {result.content_length} 字符',
-            f'> 质量评分: {result.quality_score}',
             f'> 抓取模式: {result.fetch_mode}',
             f'> 解析器: {result.parser_name}',
             f'> 耗时: 抓取 {result.fetch_duration:.2f}s + 解析 {result.parse_duration:.2f}s = 总计 {result.total_duration:.2f}s',

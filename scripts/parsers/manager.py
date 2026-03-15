@@ -1,6 +1,12 @@
 from .base import ContentParser, ParseResult
 from .trafilatura_parser import TrafilaturaParser
 from .scrapling_parser import ScraplingParser
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class ParserManager:
@@ -21,7 +27,7 @@ class ParserManager:
             if result.success:
                 return result
             
-            print(f"INFO: [Parse] Trafilatura failed, falling back to Scrapling parser")
+            logger.info(f"[Parse] Trafilatura failed, falling back to Scrapling parser")
             
             fallback_result = self._scrapling.parse(html)
             
@@ -30,7 +36,7 @@ class ParserManager:
             
             return result
         
-        print(f"WARN: Unknown parser: {parser}. Valid options: auto, trafilatura, scrapling")
+        logger.warning(f"Unknown parser: {parser}. Valid options: auto, trafilatura, scrapling")
         return ParseResult(
             title="",
             content="",

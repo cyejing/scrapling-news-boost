@@ -60,3 +60,4 @@ scrapling-news-boost/
 - 不添加注释
 - 代码简洁优雅
 - 错误日志输出到标准输出
+- markdown 表格内容要对齐，保持一致的列宽
