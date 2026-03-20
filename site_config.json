@@ -1,0 +1,30 @@
+[
+  {
+    "domain": "finance.sina.com.cn",
+    "wait_for": null,
+    "content_selector": "#artibody",
+    "network_idle": false,
+    "solve_cloudflare": false
+  },
+  {
+    "domain": "*.toutiao.com",
+    "wait_for": "article",
+    "content_selector": null,
+    "network_idle": true,
+    "solve_cloudflare": false
+  },
+  {
+    "domain": "*.huanqiu.com",
+    "wait_for": "textarea.article-content",
+    "content_selector": "textarea.article-content",
+    "network_idle": false,
+    "solve_cloudflare": false
+  },
+  {
+    "domain": "*.msn.cn",
+    "wait_for": "article",
+    "content_selector": null,
+    "network_idle": true,
+    "solve_cloudflare": false
+  }
+]

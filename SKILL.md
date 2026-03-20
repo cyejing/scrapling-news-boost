@@ -1,6 +1,6 @@
 ---
 name: scrapling-web-fetch
-description: web_fetch 的替代技能，支持反爬绕过和动态渲染。适合抓取博客、新闻、微信公众号文章等现代网页，输出结构化内容供大模型理解。
+description: 当 web_fetch 抓取失败时的替代方案，专为现代网站设计。自动绕过 Cloudflare 等反爬机制，支持 JavaScript 动态渲染，精准提取文章正文。输出干净、结构化的 Markdown 或 JSON 格式，为大模型提供高质量输入。
 ---
 
 ## 适用场景
@@ -93,32 +93,43 @@ playwright install chromium                # 安装 Chromium 浏览器
 
 ## 自我提升
 
-使用该技能后，如果返回内容存在问题：
-1. 抓取失败，有报错输出
-2. 正文内容比较少，有一些疑似被拦截或者抓取错误的内容
-4. 正文内容噪音过多
-3. 抓取时间超时（>30秒）
+使用该技能后，如果返回内容存在问题，应在 `site_config.json` 中添加或修改对应网站的配置：
 
+**触发条件：**
+1. 网站有 Cloudflare 保护导致抓取失败
+2. 正文内容比较少，疑似被拦截或抓取错误
+3. 正文内容噪音过多
+4. 抓取时间超时（>30秒）
 
-当发生上述问题时，在 `logs.jsonl` 文件追加记录：
+**配置示例：**
 ```json
-{"timestamp":"2026-03-16T14:30:25+08:00","url":"https://example.com","status":"成功","fetch_mode":"stealth","parser":"trafilatura","text_length":5234,"quality_score":85,"comment":"少量噪音"}
+[
+  {
+    "domain": "example.com",
+    "wait_for": "article",
+    "content_selector": "#content",
+    "network_idle": true,
+    "solve_cloudflare": true,
+    "original_url": "https://example.com/article/123",
+    "comment": "正文内容缺失，需要等待 article 元素加载"
+  }
+]
 ```
 
-| 字段 | 说明 |
-|------|------|
-| timestamp | ISO 时间 |
-| url | 原始 URL |
-| status | 成功/失败 |
-| fetch_mode | stealth/fetcher/urllib |
-| parser | trafilatura/scrapling |
-| text_length | 文本字符数 |
-| quality_score | 质量评分 0-100 |
-| comment | 问题描述 |
+**配置字段说明：**
 
-**质量评分标准（0-100分）：**
+| 字段            | 说明                               |
+|-----------------|------------------------------------|
+| domain          | 网站域名，支持通配符如 `*.example.com` |
+| wait_for        | 等待指定元素出现后再抓取             |
+| content_selector | CSS 选择器，提取指定区域内容         |
+| network_idle    | 等待网络空闲后再抓取                 |
+| solve_cloudflare | 是否启用 Cloudflare 绕过            |
+| original_url     | 记录触发配置的原始 URL              |
+| comment          | 配置说明，记录问题原因              |
 
-90-100：内容完整，噪音清除干净
-70-89：内容基本完整，有少量噪音
-50-69：内容有缺失或噪音较多
-0-49：抓取失败或内容严重缺失
+**操作步骤：**
+1. 如果网站有 Cloudflare 导致抓取失败，在 `site_config.json` 中添加配置，设置 `solve_cloudflare: true`
+2. 如果抓取内容存在问题，尝试修改 `wait_for`、`content_selector`、`network_idle` 等配置项
+3. 每次修改配置时，在配置中添加 `original_url` 和 `comment` 字段记录问题
+

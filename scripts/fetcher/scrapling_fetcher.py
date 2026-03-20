@@ -44,7 +44,7 @@ class ScraplingFetcher:
             hide_canvas=True,
             block_webrtc=True,
             google_search=True,
-            solve_cloudflare=False,
+            solve_cloudflare=config.solve_cloudflare,
             real_chrome=True,
             locale='zh-CN',
             timeout=15000,
